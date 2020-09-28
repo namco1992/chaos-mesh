@@ -172,17 +172,25 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controllers.StressChaosReconciler{
-		Client:        mgr.GetClient(),
-		Reader:        mgr.GetAPIReader(),
-		EventRecorder: mgr.GetEventRecorderFor("stresschaos-controller"),
-		Log:           ctrl.Log.WithName("controllers").WithName("StressChaos"),
+	// if err = (&controllers.StressChaosReconciler{
+	// 	Client:        mgr.GetClient(),
+	// 	Reader:        mgr.GetAPIReader(),
+	// 	EventRecorder: mgr.GetEventRecorderFor("stresschaos-controller"),
+	// 	Log:           ctrl.Log.WithName("controllers").WithName("StressChaos"),
+	// }).SetupWithManager(mgr); err != nil {
+	// 	setupLog.Error(err, "unable to create controller", "controller", "StressChaos")
+	// 	os.Exit(1)
+	// }
+	// if err = (&chaosmeshv1alpha1.StressChaos{}).SetupWebhookWithManager(mgr); err != nil {
+	// 	setupLog.Error(err, "unable to create webhook", "webhook", "StressChaos")
+	// 	os.Exit(1)
+	// }
+
+	if err = (&controllers.HelloWorldChaosReconciler{
+		Client: mgr.GetClient(),
+		Log:    ctrl.Log.WithName("controllers").WithName("HelloWorldChaos"),
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "StressChaos")
-		os.Exit(1)
-	}
-	if err = (&chaosmeshv1alpha1.StressChaos{}).SetupWebhookWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create webhook", "webhook", "StressChaos")
+		setupLog.Error(err, "unable to create controller", "controller", "HelloWorldChaos")
 		os.Exit(1)
 	}
 

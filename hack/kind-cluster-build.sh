@@ -119,6 +119,10 @@ kubeadmConfigPatches:
     name: config
   apiServerExtraArgs:
     enable-admission-plugins: NodeRestriction,MutatingAdmissionWebhook,ValidatingAdmissionWebhook
+containerdConfigPatches:
+- |-
+  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."localhost:5000"]
+    endpoint = ["http://registry:5000"]
 nodes:
 - role: control-plane
   extraPortMappings:
